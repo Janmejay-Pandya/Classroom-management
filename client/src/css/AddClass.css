@@ -1,0 +1,32 @@
+.add-class-form{
+    padding-top: 30px;
+    box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.3);
+}
+#class{
+    margin-top: 30px;
+    height: 50px;
+    padding: 12px 12px;
+}
+.add-class-heading{
+    font-size:xxx-large;
+}
+.go-back{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #007bff; 
+    color: white; 
+    border: 2px solid #007bff; 
+    padding: 10px 30px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    outline: none; 
+    transition: all 0.3s ease; 
+}
+.go-back:hover{
+    background-color: white; 
+    color: #007bff; 
+}

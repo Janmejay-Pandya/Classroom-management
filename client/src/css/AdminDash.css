@@ -1,0 +1,33 @@
+.dash-section{
+    margin-top: 20px;
+    margin-left: 25px;
+}
+.stu{
+    width: 200px;
+    font-size: x-large;
+    box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.3);
+}
+.cla{
+    width: 200px;
+    font-size:x-large;
+    box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.3);
+}
+.tea{
+    width: 200px;
+    font-size: x-large;
+    box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.3);
+}
+.col{
+    width: 200px;
+    font-size: x-large;
+    box-shadow: 6px 3px 10px rgba(0, 0, 0, 0.3);
+}
+.dash-section img{
+    margin-bottom: 12px;
+}
+.dash-section p{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: x-large;
+}

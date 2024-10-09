@@ -1,0 +1,27 @@
+.admin{
+    background-color: rgb(94, 94, 202);
+    color: azure;
+    font-size: larger;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 12px 12px;
+    border-radius: 20px;
+}
+.student{
+    background-color: rgb(94, 94, 202);
+    color: azure;
+    font-size: larger;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 12px 12px;
+    border-radius: 20px;
+}
+.teacher{
+    background-color: rgb(94, 94, 202);
+    color: azure;
+    font-size: larger;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 12px 12px;
+    border-radius: 20px;
+}
