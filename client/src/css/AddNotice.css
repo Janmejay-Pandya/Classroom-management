@@ -1,5 +1,4 @@
-/* Container for the form */
-.add-teacher-form {
+.add-notice-form{
     width: 400px; /* Adjust as needed */
     margin: 10px auto;
     padding: 20px;
@@ -9,17 +8,16 @@
     font-family: 'Arial', sans-serif;
 }
 
-/* Labels (e.g., Name, Email, Password) */
-.name,.email,.pass {
+.title,.details,.date{
+    display: flex;
+    justify-content: flex-start;
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
     font-size: 1.2em;
     color: #333;
 }
-
-/* Input fields styling */
-#name,#email,#password {
+#title,#details,#date{
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -29,14 +27,13 @@
     box-sizing: border-box;
     background-color: #fafafa;
 }
-
-/* Input fields placeholder color */
-::placeholder {
+#title::placeholder{
+    font-size:medium;
+}
+::placeholder{
     color: #999;
 }
-
-/* Register button styling */
-.add-teacher-button {
+.add-notice-button{
     width: 100%;
     padding: 12px;
     background-color: black;
@@ -46,20 +43,10 @@
     cursor: pointer;
     font-size: 1.1em;
 }
-
-.add-teacher-button:hover {
-    background-color: #333; 
+.add-notice-button:hover{
+     background-color: #333; 
 }
-
-
-.class,.sub {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    color: #333;
-    display: flex;
-    justify-content:center;
-}
-.add-teacher-heading{
+.add-notice-heading{
     margin-top: 20px;
     font-size: xxx-large;
 }

@@ -1,7 +1,7 @@
 
 function ShowTeacher() {
   return (
-    <div>ShowTeacher</div>
+    <div>View Teacher </div>
   )
 }
 

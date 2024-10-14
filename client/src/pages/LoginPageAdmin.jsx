@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 function LoginPageAdmin() {
     const navigate = useNavigate();
     function handleClick() {
-        navigate("/AdminDash");
+        navigate("/admindash");
+    }
+    function handleGoBack() {
+        navigate("/chooseuser");
     }
     return <>
         <section className="admin-login">
@@ -12,19 +15,21 @@ function LoginPageAdmin() {
                 <div className="admin-login-img">
                     <img src={loginImg} alt="" width={500} height={500} />
                 </div>
-                <div className="login-form">
-                    <h1>Admin Login</h1>
+                <div className="adm-login-form">
+                    <h1 className="admin-login-heading">Admin Login</h1>
                     <form >
                         <div>
-                            <input type="email" name="email" id="email" placeholder="Enter your email*" />
+                            <input type="email" name="email" id="adm-email" placeholder="Enter your email*" />
                         </div>
                         <div>
-                            <input type="password" name="password" id="password" placeholder="Password* " />
+                            <input type="password" name="password" id="adm-password" placeholder="Password* " />
                         </div>
                         <br />
                         <button className="btn" onClick={handleClick}>Login</button>
+                        <br />
+                        <button className="btn std-btn" onClick={handleGoBack}>Go Back</button>
                     </form>
-                    <p>Do not have an account? <a href="/AdminRegister" >Sign up</a></p>
+                    <p className="signup-link">Do not have an account? <a href="/AdminRegister" >Sign up</a></p>
                 </div>
             </div>
         </section>

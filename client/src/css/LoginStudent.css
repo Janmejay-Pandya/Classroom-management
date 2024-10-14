@@ -1,9 +1,12 @@
-.adm-login-form{
+.login-form{
     box-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
-    height: 450px;
+    height: 500px;
     padding-top: 30px;
 }
-#adm-email,#adm-password{
+.student-login-para{
+    margin-bottom: 20px;
+}
+#stu-roll-number,#std-name,#std-password{
     padding: 10px;
     font-size: 16px;
     border: 1px solid #007bff;
@@ -13,16 +16,10 @@
     transition: border 0.3s;
     width: 80%;
 }
-.signup-link{
-    font-size: large;
+.std-btn{
+    margin: 20px;
 }
-.signup-link a{
+.student-login-heading{
+    font-size: xxx-large;
     color: blue;
-}
-.admin-login-heading{
-    margin-bottom: 30px;
-    font-size: xx-large;
-}
-.admin-login{
-    margin-top: 20px;
 }

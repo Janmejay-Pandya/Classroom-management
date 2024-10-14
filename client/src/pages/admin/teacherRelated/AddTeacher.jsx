@@ -12,15 +12,15 @@ function AddTeacher() {
                 <form>
                     <div>
                         <label htmlFor="name" className="name">Name</label>
-                        <input type="text" name="name" id="name" placeholder="Enter teacher's name..." />
+                        <input type="text" name="name" id="name" placeholder="Enter teacher's name" />
                     </div>
                     <div>
                         <label htmlFor="email" className="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Enter teacher's email..." />
+                        <input type="email" name="email" id="email" placeholder="Enter teacher's email" />
                     </div>
                     <div>
                         <label htmlFor="password" className="pass">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Enter teacher's password..." />
+                        <input type="password" name="password" id="password" placeholder="Enter teacher's password" />
                     </div>
                     <button className="add-teacher-button">Register</button>
                 </form>

@@ -14,21 +14,24 @@ function AdminRegister() {
                     <img src={registerImg} alt="" width={500} height={500} />
                 </div>
                 <div className="register-form">
-                    <h1>Admin Register</h1>
-                    <p>Create your own school by registering as an admin.
+                    <h1 className="admin-heading">Admin Register</h1>
+                    <p className="admin-para">Create your own school by registering as an admin.
                         You will be able to add students and faculty and manage the system.</p>
                     <form >
                         <div>
-                            <input type="text" name="name" id="name" placeholder="Enter your name* " />
+                            <input type="text" name="name" id="admin-name" placeholder="Enter your name* " />
                         </div>
+
                         <div>
-                            <input type="text" name="schoolName" id="schoolName" placeholder="Create your School Name* " />
+                            <input type="text" name="schoolName" id="schoolname" placeholder="Create your School Name* " />
                         </div>
+
                         <div>
-                            <input type="email" name="email" id="email" placeholder="Enter your email* " />
+                            <input type="email" name="email" id="admin-email" placeholder="Enter your email* " />
                         </div>
+
                         <div>
-                            <input type="password" name="password" id="password" placeholder="Password* " />
+                            <input type="password" name="password" id="admin-password" placeholder="Password* " />
                         </div>
                         <button className="btn" onClick={handleClick} >Register</button>
                     </form>

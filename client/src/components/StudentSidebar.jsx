@@ -1,18 +1,14 @@
 import menu from "../assets/menu.png";
-import close from "../assets/close.png";
-import "../css/Sidebar.css";
 import home from "../assets/home.png";
-import classes from "../assets/class.png";
 import subject from "../assets/subjects.png";
-import teachers from "../assets/teachers.png";
-import student from "../assets/student.png";
-import notice from "../assets/notice.png";
-// import complain from "../assets/complain.png";
+import attendance from "../assets/attendance.png";
 import profile from "../assets/account.png";
 import logout from "../assets/logout.png";
-// import { useState } from "react";
-function Sidebar() {
-    // const [isSidebarOpen, setSidebarOpen] = useState(true);
+import close from "../assets/close.png";
+import { Link } from "react-router-dom";
+
+
+function StudentSidebar() {
     function showSidebar() {
         const sidebar = document.querySelector(".sidebar");
         sidebar.style.display = "flex";
@@ -26,12 +22,10 @@ function Sidebar() {
         <nav>
             <ul className="sidebar"> {/*{`sidebar ${isSidebarOpen ? '' : 'hidden'}`}*/}
                 <li><img src={close} onClick={hideSidebar} alt="" /></li>
-                <li><img src={home} alt="" /><a href="/AdminDash">Home</a></li>
-                <li><img src={classes} alt="" /><a href="/classes">Classes</a></li>
-                <li><img src={subject} alt="" /><a href="/subject">Subject</a></li>
-                <li><img src={teachers} alt="" /><a href="/teacher">Teacher</a></li>
-                <li><img src={student} alt="" /><a href="/student">Students</a></li>
-                <li><img src={notice} alt="" /><a href="/notice">Notices</a></li>
+                <li><img src={home} alt="" /> <Link to="studenthome">Home</Link></li>
+
+                <li><img src={subject} alt="" /><Link to="studentsubject">Subject</Link></li>
+                <li><img src={attendance} alt="" /><Link to="studentattendance">Attendance</Link></li>
                 {/* <li><img src={complain} alt="" /><a href="">Complaints</a></li> */}
                 <br />
                 <li><img src={profile} alt="" /><a href="">Profile</a></li>
@@ -42,4 +36,4 @@ function Sidebar() {
     </>
 }
 
-export default Sidebar;
+export default StudentSidebar;
