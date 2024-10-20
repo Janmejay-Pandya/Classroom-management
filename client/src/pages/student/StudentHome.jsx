@@ -2,7 +2,7 @@ import "../../css/StudentHome.css";
 
 function StudentHome() {
     return <>
-        <div className="app">
+        <div className="student-app">
             <div className="main-content">
                 <div className="dashboard-content">
                     <div className="summary-card">

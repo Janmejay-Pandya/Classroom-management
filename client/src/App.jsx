@@ -29,6 +29,7 @@ import ShowNotice from './pages/admin/noticeRelated/ShowNotice';
 import StudentDashboard from './pages/student/StudentDashboard';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 // import StudentHome from './pages/student/StudentHome';
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return <>
@@ -38,11 +39,19 @@ function App() {
         <Route path="/ChooseUser" element={<ChooseUser />} />
         {/* Login Routes */}
         <Route path='/LoginPageAdmin' element={<LoginPageAdmin />} />
+        <Route
+          path="/AdminDash"
+          element={
+            <PrivateRoute>
+              <AdminDash />
+            </PrivateRoute>
+          }
+        />
         <Route path='/AdminRegister' element={<AdminRegister />} />
         <Route path='/LoginStudent' element={<LoginStudent />} />
         <Route path='/LoginTeacher' element={<LoginTeacher />} />
         {/* Admin Paths */}
-        <Route path='/AdminDash' element={<AdminDash />} />
+        {/* <Route path='/AdminDash' element={<AdminDash />} /> */}
         {/* <Route path='/AdminDash' element={<AdminDash />} />    Issue */}
         {/* Class Related */}
         <Route path='/classes' element={<Classes />} />

@@ -5,8 +5,7 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: fit-content;
+    width: 40%;
 }
 .student-name{
     display: flex;

@@ -14,7 +14,7 @@ function HomePage() {
                 </div>
                 <div className="intro">
                     <h1 className="introduction">Welcome To School Management System</h1>
-                    <p className="para">Streamline school management, class organization, and add students and faculty. Seamlessly track attendance, assess performance, and provide feedback. Access records, view marks, and communicate effortlessly.</p>
+                    <p className="para-login">Streamline school management, class organization, and add students and faculty. Seamlessly track attendance, assess performance, and provide feedback. Access records, view marks, and communicate effortlessly.</p>
                     <button className="btn" onClick={handleClick}>Login</button>
                 </div>
             </div>

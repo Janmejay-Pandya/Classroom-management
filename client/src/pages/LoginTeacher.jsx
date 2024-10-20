@@ -1,8 +1,21 @@
 import teacherLogin from "../assets/teacher-login-portal.png";
 import { useNavigate } from "react-router-dom";
 import "../css/LoginTeacher.css";
+import { useState } from "react";
 
 function LoginTeacher() {
+  const [teacherlogin, setteacherlogin] = useState({
+    teacheremail: "",
+    teacherpassword: ""
+  });
+  function handleInput(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    setteacherlogin({
+      ...teacherlogin,
+      [name]: value,
+    })
+  }
   const naviagte = useNavigate();
   function handleClick() {
     naviagte('/teacher/teacherhome');
@@ -21,11 +34,25 @@ function LoginTeacher() {
           <p className="student-login-para">Welcome, Please enter your details</p>
           <form>
             <div>
-              <input type="email" name="teacher-email" id="teacher-email" placeholder="Enter your email*" />
+              <input
+                type="email"
+                name="teacheremail"
+                id="teacher-email"
+                placeholder="Enter your email*"
+                onChange={handleInput}
+                value={teacherLogin.teacheremail}
+              />
             </div>
 
             <div>
-              <input type="password" name="student-password" id="std-password" placeholder="Enter Password*" />
+              <input
+                type="password"
+                name="teacherpassword"
+                id="std-password"
+                placeholder="Enter Password*"
+                onChange={handleInput}
+                value={teacherLogin.teacherpassword}
+              />
             </div>
             <br />
             <button className="btn std-btn" onClick={handleClick}>Login</button>

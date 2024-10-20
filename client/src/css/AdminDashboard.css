@@ -1,12 +1,14 @@
-.header{
+/* .header{
     position: relative;
     left: 0px;
     display: flex;
+    padding-top: 20px;
     align-items: center;
     justify-content: center;
     font-size: x-large;
     color: white;
-}.admin-nav{
+} */
+.admin-nav{
     position: relative;
     top: 0;
     /* width:100%; */

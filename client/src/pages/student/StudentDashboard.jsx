@@ -7,8 +7,7 @@ function StudentDashboard() {
     return <>
         <div>
             <main className="admin-nav">
-                <StudentSidebar />
-                <div className="header">Student DashBoard</div>
+                <StudentSidebar title={"Student DashBoard"} />
             </main>
             <Routes>
                 <Route path="/studenthome" element={<StudentHome />} />

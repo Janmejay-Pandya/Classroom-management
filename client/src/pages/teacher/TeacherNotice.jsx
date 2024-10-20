@@ -1,8 +1,7 @@
-import AdminDashboard from "../../../components/AdminDashboard"
-import "../../../css/AddNotice.css";
+import "../../css/AddNotice.css";
 import { useState } from "react";
 
-function AddNotice() {
+function TeacherNotice() {
     const [notice, setnotice] = useState({
         title: "",
         details: "",
@@ -16,17 +15,11 @@ function AddNotice() {
             [name]: value
         })
     }
-    function handleSubmit(e) {
-        e.preventDefault(); // Prevent page reload
-        // Logic to handle form submission (e.g., save data)
-        // console.log({ notice });
-    }
     return <>
-        <AdminDashboard />
         <section className="section-notice">
             <div className="add-notice">
                 <h1 className="add-notice-heading">Add Notice</h1>
-                <form className="add-notice-form" onSubmit={handleSubmit}>
+                <form className="add-notice-form">
                     <div>
                         <label htmlFor="title" className="title">Title</label>
                         <input type="text" name="title" id="title" placeholder="Enter Notice Title" onChange={handleInput} value={notice.title} />
@@ -46,4 +39,4 @@ function AddNotice() {
     </>
 }
 
-export default AddNotice
+export default TeacherNotice;

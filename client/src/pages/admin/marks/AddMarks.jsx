@@ -11,7 +11,7 @@ function AddMarks() {
             <h1 className="add-marks-heading">Add Marks</h1>
             <p className="student-marks-name">Student name: </p> {/* Name will be fetched from database*/}
             <div className="add-marks-form">
-                <form >
+                <form className="add-marks-form">
                     <div>
                         <select name="choose-subject" id="choose-subject">
                             <option value="" disabled>Select Subject</option>

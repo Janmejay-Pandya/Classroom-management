@@ -1,10 +1,49 @@
 import loginImg from "../assets/login.png";
 import "../css/LoginPageAdmin.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 function LoginPageAdmin() {
     const navigate = useNavigate();
-    function handleClick() {
-        navigate("/admindash");
+    const [adminlogin, setadminlogin] = useState({
+        email: "",
+        password: ""
+    });
+    function handleInput(e) {
+        let name = e.target.name;
+        let value = e.target.value;
+        setadminlogin({
+            ...adminlogin,
+            [name]: value,
+        })
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3500/api/auth/LoginPageAdmin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(adminlogin),
+            });
+
+            const responseData = await response.json();
+            if (response.ok) {
+
+                alert("Login Successfull");
+                setadminlogin({ email: "", password: "" });
+                localStorage.setItem("token", responseData.token)
+                console.log(responseData);
+                navigate("/admindash");
+            } else {
+
+                console.log("There was an error in log in" + JSON.stringify(responseData))
+            }
+        } catch (error) {
+            alert("Invalid Credentials");
+            console.log(error);
+
+        }
     }
     function handleGoBack() {
         navigate("/chooseuser");
@@ -17,15 +56,29 @@ function LoginPageAdmin() {
                 </div>
                 <div className="adm-login-form">
                     <h1 className="admin-login-heading">Admin Login</h1>
-                    <form >
+                    <form onSubmit={handleSubmit}>
                         <div>
-                            <input type="email" name="email" id="adm-email" placeholder="Enter your email*" />
+                            <input
+                                type="email"
+                                name="email"
+                                id="adm-email"
+                                placeholder="Enter your email*"
+                                onChange={handleInput}
+                                value={adminlogin.email}
+                            />
                         </div>
                         <div>
-                            <input type="password" name="password" id="adm-password" placeholder="Password* " />
+                            <input
+                                type="password"
+                                name="password"
+                                id="adm-password"
+                                placeholder="Password*"
+                                onChange={handleInput}
+                                value={adminlogin.password}
+                            />
                         </div>
                         <br />
-                        <button className="btn" onClick={handleClick}>Login</button>
+                        <button className="btn">Login</button>
                         <br />
                         <button className="btn std-btn" onClick={handleGoBack}>Go Back</button>
                     </form>

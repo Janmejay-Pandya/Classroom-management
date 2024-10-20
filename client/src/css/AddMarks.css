@@ -9,8 +9,7 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: fit-content;
+    width:40%;
 }
 
 .add-marks-heading{
@@ -23,6 +22,7 @@
 }
 #stu-marks{
     height: 40.67px;
+    width: 100%;
 }
 #choose-subject,#stu-marks{
     padding: 10px;
@@ -32,6 +32,7 @@
     margin-bottom: 1.5rem;
     outline: none;
     transition: border 0.3s;
+    display: flex;
 }
 .student-marks-name{
     margin-bottom: 20px;
@@ -41,4 +42,5 @@
 }
 .add-marks-go-back{
     width: 100%;
+    margin-top: 20px;
 }

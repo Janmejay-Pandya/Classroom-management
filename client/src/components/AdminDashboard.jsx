@@ -3,8 +3,7 @@ import "../css/AdminDashboard.css";
 function AdminDashboard() {
     return <>
         <main className="admin-nav">
-            <Sidebar></Sidebar>
-            <div className="header">Admin DashBoard</div>
+            <Sidebar title={"Admin Dashboard"} />
         </main>
     </>
 }

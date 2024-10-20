@@ -28,7 +28,7 @@ function ViewStudent() {
                 </div>
                 <button className="btn-remove">Delete</button>
                 <br />
-                <button className="btn" onClick={handleClick}>Go Back</button>
+                <button className="go-back stu-go-back" onClick={handleClick}>Go Back</button>
             </div>
         </section>
     </>

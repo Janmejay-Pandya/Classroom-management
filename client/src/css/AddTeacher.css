@@ -16,6 +16,7 @@
     font-weight: bold;
     font-size: 1.2em;
     color: #333;
+    display: flex;
 }
 
 /* Input fields styling */

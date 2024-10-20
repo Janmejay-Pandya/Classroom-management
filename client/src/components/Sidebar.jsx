@@ -1,45 +1,56 @@
-import menu from "../assets/menu.png";
-import close from "../assets/close.png";
-import "../css/Sidebar.css";
+import PropTypes from "prop-types";
 import home from "../assets/home.png";
 import classes from "../assets/class.png";
 import subject from "../assets/subjects.png";
 import teachers from "../assets/teachers.png";
 import student from "../assets/student.png";
 import notice from "../assets/notice.png";
-// import complain from "../assets/complain.png";
 import profile from "../assets/account.png";
 import logout from "../assets/logout.png";
-// import { useState } from "react";
-function Sidebar() {
-    // const [isSidebarOpen, setSidebarOpen] = useState(true);
-    function showSidebar() {
-        const sidebar = document.querySelector(".sidebar");
-        sidebar.style.display = "flex";
-        // setSidebarOpen(!isSidebarOpen);
-    }
-    function hideSidebar() {
-        const sidebar = document.querySelector(".sidebar");
-        sidebar.style.display = "none";
-    }
-    return <>
-        <nav>
-            <ul className="sidebar"> {/*{`sidebar ${isSidebarOpen ? '' : 'hidden'}`}*/}
-                <li><img src={close} onClick={hideSidebar} alt="" /></li>
-                <li><img src={home} alt="" /><a href="/AdminDash">Home</a></li>
-                <li><img src={classes} alt="" /><a href="/classes">Classes</a></li>
-                <li><img src={subject} alt="" /><a href="/subject">Subject</a></li>
-                <li><img src={teachers} alt="" /><a href="/teacher">Teacher</a></li>
-                <li><img src={student} alt="" /><a href="/student">Students</a></li>
-                <li><img src={notice} alt="" /><a href="/notice">Notices</a></li>
-                {/* <li><img src={complain} alt="" /><a href="">Complaints</a></li> */}
-                <br />
-                <li><img src={profile} alt="" /><a href="">Profile</a></li>
-                <li><img src={logout} alt="" /><a href="">Logout</a></li>
-            </ul>
-            <li onClick={showSidebar} className="menu"><img src={menu} alt="" /></li>
-        </nav>
-    </>
+import "../css/Sidebar.css";
+import { useState } from "react";
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+
+function Sidebar({ title }) {
+    const [sidebar, setSidebar] = useState(false);
+
+    const showSidebar = () => setSidebar(!sidebar);
+
+    return (
+        <div className="sidebar">
+            {/* Navbar with conditional rendering for hamburger icon */}
+            <div className="navbar-admin">
+                {!sidebar && (
+                    <FaBars onClick={showSidebar} className="menu-bars-admin" />
+                )}
+                <div className="dashboard-name">{title}</div>
+            </div>
+
+            {/* Sidebar */}
+            <nav className={sidebar ? 'nav-menu-admin active' : 'nav-menu-admin'}>
+                <ul className="nav-menu-items">
+                    {/* Close button inside the sidebar */}
+                    <li className="navbar-toggle-admin">
+                        <FaTimes onClick={showSidebar} className="menu-bars-close" />
+                    </li>
+                    <Link to="/AdminDash"><li className="nav-text"><img src={home} alt="home" />Home</li></Link>
+                    <Link to="/classes"><li className="nav-text"><img src={classes} alt="classes" />Classes</li></Link>
+                    <Link to="/subject"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
+                    <Link to="/teacher"><li className="nav-text"><img src={teachers} alt="teachers" />Teacher</li></Link>
+                    <Link to="/student"><li className="nav-text"><img src={student} alt="student" />Student</li></Link>
+                    <Link to="/notice"><li className="nav-text"><img src={notice} alt="notice" />Notices</li></Link>
+                    <br />
+                    <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
+                    <Link to="/logout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
+                </ul>
+            </nav>
+        </div>
+    );
 }
+
+Sidebar.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
 export default Sidebar;

@@ -3,8 +3,14 @@ import AdminDashboard from "../../../components/AdminDashboard";
 import { useNavigate } from "react-router-dom";
 function Teacher() {
     const navigate = useNavigate();
+    let isTeacher = true;
     function handleClick() {
-        navigate('/classes');
+        if (isTeacher == true) {
+            navigate('/addteacher');
+        }
+        else {
+            navigate('/classes');
+        }
     }
     return <>
         <AdminDashboard />

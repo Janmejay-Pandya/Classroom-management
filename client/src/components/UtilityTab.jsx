@@ -22,21 +22,21 @@ function UtilityTab() {
     };
 
     return <>
-        <div className="navbar">
+        <div className="navbar-utility">
             <div
-                className={`nav-item ${activeTab === 'details' ? 'active' : ''}`}
+                className={`nav-item-utility ${activeTab === 'details' ? 'active' : ''}`}
                 onClick={() => handleTabDetail('details')}
             >
                 DETAILS
             </div>
             <div
-                className={`nav-item ${activeTab === 'attendance' ? 'active' : ''}`}
+                className={`nav-item-utility ${activeTab === 'attendance' ? 'active' : ''}`}
                 onClick={() => handleTabAttendence('attendance')}
             >
                 ATTENDANCE
             </div>
             <div
-                className={`nav-item ${activeTab === 'marks' ? 'active' : ''}`}
+                className={`nav-item-utility ${activeTab === 'marks' ? 'active' : ''}`}
                 onClick={() => handleTabMarks('marks')}
             >
                 MARKS

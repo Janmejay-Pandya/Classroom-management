@@ -10,3 +10,6 @@
 .std-para2{
     margin-bottom: 12px;
 }
+.std-subject-div li{
+    list-style: none;
+}

@@ -5,3 +5,22 @@
 .grid-two-cols{
     grid-template-columns: repeat(2,1fr);
 }
+.intro{
+    margin-top: 20%;
+}
+.homepage-img{
+    height: 200px;
+}
+.para-login{
+    text-align: center;
+    font-size:large ;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.introduction{
+    font-size: xx-large;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+body{
+background: linear-gradient(300deg, #E3FDFD, #CBF1F5, #A6E3E9);
+}
