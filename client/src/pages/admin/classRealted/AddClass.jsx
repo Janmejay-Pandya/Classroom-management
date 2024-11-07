@@ -5,26 +5,44 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 function AddClass() {
     const [addclass, setaddclass] = useState({
-        addclass: ""
+        classes: ""
     });
     function handleInput(e) {
-        let name = e.target.name;
-        let value = e.target.value;
-
         setaddclass({
             ...addclass,
-            [name]: value,
-        })
+            classes: e.target.value
+        });
     }
     const formStyle = {
         marginTop: "50px"
     };
     const navigate = useNavigate();
-    function handleGoBack() {
-        navigate('/classes');
-    }
-    function handleClick() {
-        navigate('/ClassDetails');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3500/api/makeclass/createclass", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(addclass),
+            });
+            console.log(response);
+
+            if (response.ok) {
+                const responseData = await response.json();
+                setaddclass("");
+                alert("Class created ");
+                console.log(responseData);
+                // navigate("/classdetails");
+            }
+            else {
+                const errorText = await response.text(); // Handle non-JSON response
+                console.log("Error:", errorText);
+            }
+        } catch (error) {
+            console.log("AddClass", error);
+        }
     }
     return <>
         <AdminDashboard />
@@ -36,12 +54,12 @@ function AddClass() {
 
                 <div className="add-class-form">
                     <h1 className="add-class-heading">Create Class</h1>
-                    <form >
-                        <input type="text" name="addclass" id="class" placeholder="Create a Class*" onChange={handleInput} value={addclass.addclass} />
+                    <form method="POST" onSubmit={handleSubmit}>
+                        <input type="text" name="className" id="class" placeholder="Create a Class*" onChange={handleInput} value={addclass.className} />
                         <br />
-                        <button className="btn" onClick={handleClick}>Create</button>
+                        <button className="btn">Create</button>
                         <br />
-                        <button className="go-back" onClick={handleGoBack}> Go Back</button>
+                        <button className="go-back" onClick={() => navigate(-1)}> Go Back</button>
                     </form>
                 </div>
             </div>

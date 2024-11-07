@@ -38,7 +38,7 @@ function StudentSidebar({ title }) {
                     <Link to="studentsubject"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
                     <br />
                     <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
-                    <Link to="/logout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
+                    <Link to="/student/studentlogout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
                 </ul>
             </nav>
         </div>

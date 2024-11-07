@@ -9,11 +9,13 @@ const userSchema = new mongoose.Schema({
     },
     schoolname: {
         type: String,
-        require:true
+        require: true,
+        unique:true
     },
     adminemail: {
         type: String,
-        require:true
+        require: true,
+        unique:true
     },
     adminpassword: {
         type: String,

@@ -1,23 +1,13 @@
 // Page to see all the students of a class 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import "../../../css/ShowStudent.css";
 import AdminDashboard from '../../../components/AdminDashboard';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../../store/auth";
+
 function ShowStudent() {
     const navigate = useNavigate();
-    const [students, setStudents] = useState([]);
-
-    // Mock data for students (You can replace this with data fetched from an API)
-    useEffect(() => {
-        // Simulating data fetch
-        const fetchedStudents = [
-            { name: 'Reddy', rollNumber: '22070122091', class: 'CS-C' },
-            { name: 'Janmejay', rollNumber: '22070122086', class: 'CS-C' },
-            { name: 'Jay', rollNumber: '22070122087', class: 'CS-C' },
-            // Add more students as needed
-        ];
-        setStudents(fetchedStudents);
-    }, []);
+    const { student } = useAuth();
 
     function handleView() {
         navigate('/viewstudent');
@@ -38,12 +28,12 @@ function ShowStudent() {
                     </tr>
                 </thead>
                 <tbody>
-                    {students.length > 0 ? (
-                        students.map((student, index) => (
+                    {student.length > 0 ? (
+                        student.map((studentinfo, index) => (
                             <tr key={index}>
-                                <td>{student.name}</td>
-                                <td>{student.rollNumber}</td>
-                                <td>{student.class}</td>
+                                <td>{studentinfo.stdname}</td>
+                                <td>{studentinfo.stdrollnumber}</td>
+                                <td>{studentinfo.studentclass}</td>
                                 <td className="actions">
                                     <button className="view-btn" onClick={handleView}>VIEW</button>
                                     <button className="attendance-btn" onClick={handleAttendence}>TAKE ATTENDANCE</button>

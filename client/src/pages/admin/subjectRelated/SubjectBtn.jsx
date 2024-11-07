@@ -1,9 +1,20 @@
 import AdminDashboard from "../../../components/AdminDashboard";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../store/auth";
+
 function SubjectBtn() {
+    const { classes } = useAuth();
+    console.log(classes);
+
     const navigate = useNavigate();
     function handleClick() {
-        navigate("/SubjectForm");
+        if (classes.length == 0) {
+            navigate("/addclass");
+            alert("Create class to add Subject");
+        }
+        else {
+            navigate("/SubjectForm");
+        }
     }
     return <>
         <AdminDashboard />

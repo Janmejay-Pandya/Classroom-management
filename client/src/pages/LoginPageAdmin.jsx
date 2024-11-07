@@ -2,7 +2,9 @@ import loginImg from "../assets/login.png";
 import "../css/LoginPageAdmin.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../store/auth";
 function LoginPageAdmin() {
+    const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
     const [adminlogin, setadminlogin] = useState({
         email: "",
@@ -29,10 +31,9 @@ function LoginPageAdmin() {
 
             const responseData = await response.json();
             if (response.ok) {
-
                 alert("Login Successfull");
                 setadminlogin({ email: "", password: "" });
-                localStorage.setItem("token", responseData.token)
+                storeTokenInLS(responseData.token);
                 console.log(responseData);
                 navigate("/admindash");
             } else {

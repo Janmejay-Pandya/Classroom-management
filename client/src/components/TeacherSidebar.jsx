@@ -37,14 +37,14 @@ function TeacherSidebar({ title }) {
                     <Link to="teachernotice"><li className="nav-text"><img src={notice} alt="notice" />Notices</li></Link>
                     <br />
                     <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
-                    <Link to="/logout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
+                    <Link to="/teacher/teacherlogout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
                 </ul>
             </nav>
         </div>
     );
 }
 
-TeacherSidebar.PropTypes = {
+TeacherSidebar.propTypes = {
     title: PropTypes.string.isRequired,
 };
 

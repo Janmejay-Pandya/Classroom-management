@@ -2,8 +2,10 @@ import studentlogin from "../assets/student-login.png"
 import { useNavigate } from "react-router-dom";
 import "../css/LoginStudent.css";
 import { useState } from "react";
+import { useAuth } from "../store/auth";
 
 function LoginStudent() {
+  const { storeTokenInLS } = useAuth();
   const [stdlogin, setstdlogin] = useState({
     sturollnumber: "",
     studentname: "",
@@ -19,11 +21,25 @@ function LoginStudent() {
     })
   }
   const navigate = useNavigate();
-  function handleClick() {
-    navigate('/student/studenthome');
-  }
-  function handleGoBack() {
-    navigate('/ChooseUser');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:3500/api/std/LoginStudent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(stdlogin),
+    });
+    console.log(response);
+
+    const responseData = await response.json();
+    if (response.ok) {
+      alert("Student Login Successfull");
+      setstdlogin({ sturollnumber: "", studentname: "", studentpassword: "" });
+      storeTokenInLS(responseData.token);
+      console.log(responseData);
+      navigate('/student/studenthome');
+    }
   }
   return (
     <section className="student-login">
@@ -34,7 +50,7 @@ function LoginStudent() {
         <div className="login-form">
           <h1 className="student-login-heading">Student Login</h1>
           <p className="student-login-para">Welcome, Please enter your details</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <input
                 type="number"
@@ -68,9 +84,9 @@ function LoginStudent() {
               />
             </div>
             <br />
-            <button className="btn std-btn" onClick={handleClick}>Login</button>
+            <button className="btn std-btn" >Login</button>
             <br />
-            <button className="btn std-btn" onClick={handleGoBack}>Go Back</button>
+            <button className="btn std-btn" onClick={() => navigate(-1)}>Go Back</button>
           </form>
         </div>
       </div>

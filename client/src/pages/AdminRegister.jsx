@@ -1,9 +1,11 @@
 import registerImg from "../assets/register.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../store/auth";
 
 import "../css/AdminRegister.css";
 function AdminRegister() {
+    const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
     const [registeradmin, setregisteradmin] = useState({
         adminname: "",
@@ -23,7 +25,7 @@ function AdminRegister() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3500/api/auth/adminregister", {
+            const response = await fetch("http://localhost:3500/api/auth/AdminRegister", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,6 +37,7 @@ function AdminRegister() {
             if (response.ok) {
                 const responseData = await response.json();
                 setregisteradmin({ adminname: "", schoolname: "", adminemail: "", adminpassword: "" });
+                storeTokenInLS(responseData.token);
                 alert("Registration Successfull, Welcome to the Admin DashBoard");
                 console.log(responseData);
                 navigate("/AdminDash");

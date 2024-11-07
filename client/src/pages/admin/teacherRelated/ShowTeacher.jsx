@@ -5,4 +5,4 @@ function ShowTeacher() {
   )
 }
 
-export default ShowTeacher
+export default ShowTeacher;

@@ -35,7 +35,7 @@ function Sidebar({ title }) {
                         <FaTimes onClick={showSidebar} className="menu-bars-close" />
                     </li>
                     <Link to="/AdminDash"><li className="nav-text"><img src={home} alt="home" />Home</li></Link>
-                    <Link to="/classes"><li className="nav-text"><img src={classes} alt="classes" />Classes</li></Link>
+                    <Link to="/classdisplay"><li className="nav-text"><img src={classes} alt="classes" />Classes</li></Link>
                     <Link to="/subject"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
                     <Link to="/teacher"><li className="nav-text"><img src={teachers} alt="teachers" />Teacher</li></Link>
                     <Link to="/student"><li className="nav-text"><img src={student} alt="student" />Student</li></Link>

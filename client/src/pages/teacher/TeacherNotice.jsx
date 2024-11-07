@@ -14,12 +14,32 @@ function TeacherNotice() {
             ...notice,
             [name]: value
         })
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3500/api/createnotice/addnotice", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(notice),
+            });
+            if (response.ok) {
+                alert("Notice Added Successfully");
+                const responseData = await response.json();
+                setnotice({ title: "", details: "", date: "" });
+                console.log(responseData);
+            }
+        } catch (error) {
+            console.error("Error adding notice", error);
+        }
     }
     return <>
         <section className="section-notice">
             <div className="add-notice">
                 <h1 className="add-notice-heading">Add Notice</h1>
-                <form className="add-notice-form">
+                <form className="add-notice-form" method="POST" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="title" className="title">Title</label>
                         <input type="text" name="title" id="title" placeholder="Enter Notice Title" onChange={handleInput} value={notice.title} />

@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
-    addclass: {
+    classes: {
         type: String,
-        require:true
+        required: true,
+        unique:true
     }
 });
 

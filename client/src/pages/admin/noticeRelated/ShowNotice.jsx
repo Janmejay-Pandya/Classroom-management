@@ -1,15 +1,9 @@
 import "../../../css/ShowNotice.css";
 import AdminDashboard from "../../../components/AdminDashboard";
+import { useAuth } from "../../../store/auth";
 
 function ShowNotice() {
-    const data = [
-        {
-            title: "Exams",
-            details: "We have mid sem starting from 20 october",
-            date: "2024-10-11",
-        },
-    ];
-
+    const { notice } = useAuth();
     return <>
         <AdminDashboard />
         <table className="custom-table">
@@ -22,7 +16,7 @@ function ShowNotice() {
                 </tr>
             </thead>
             <tbody>
-                {data.map((item, index) => (
+                {notice.map((item, index) => (
                     <tr key={index}>
                         <td>{item.title}</td>
                         <td>{item.details}</td>

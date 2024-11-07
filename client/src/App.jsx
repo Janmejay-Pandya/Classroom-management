@@ -30,6 +30,9 @@ import StudentDashboard from './pages/student/StudentDashboard';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 // import StudentHome from './pages/student/StudentHome';
 import PrivateRoute from "./PrivateRoute";
+import Logout from './pages/Logout';
+// import ShowClass from './pages/admin/classRealted/ShowClass';
+import ClassDisplay from './pages/admin/classRealted/ClassDisplay';
 
 function App() {
   return <>
@@ -39,14 +42,7 @@ function App() {
         <Route path="/ChooseUser" element={<ChooseUser />} />
         {/* Login Routes */}
         <Route path='/LoginPageAdmin' element={<LoginPageAdmin />} />
-        <Route
-          path="/AdminDash"
-          element={
-            <PrivateRoute>
-              <AdminDash />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/AdminDash" element={<PrivateRoute> <AdminDash /></PrivateRoute>} />
         <Route path='/AdminRegister' element={<AdminRegister />} />
         <Route path='/LoginStudent' element={<LoginStudent />} />
         <Route path='/LoginTeacher' element={<LoginTeacher />} />
@@ -54,36 +50,39 @@ function App() {
         {/* <Route path='/AdminDash' element={<AdminDash />} /> */}
         {/* <Route path='/AdminDash' element={<AdminDash />} />    Issue */}
         {/* Class Related */}
-        <Route path='/classes' element={<Classes />} />
-        <Route path='/addclass' element={<AddClass />} />
-        <Route path='/classdetails' element={<ClassDetails />} />
+        <Route path='/classes' element={<PrivateRoute><Classes /></PrivateRoute>} />
+        <Route path='/addclass' element={<PrivateRoute><AddClass /></PrivateRoute>} />
+        <Route path='/classdetails' element={<PrivateRoute><ClassDetails /></PrivateRoute>} />
+        {/* <Route path='/classlist' element={<ShowClass />} /> */}
+        <Route path='/classdisplay' element={<PrivateRoute><ClassDisplay /></PrivateRoute>} />
         {/* Subject Related */}
-        <Route path='/subject' element={<SubjectBtn />} />
-        <Route path='/subjectform' element={<SubjectForm />} />
-        <Route path='showsubject' element={<ShowSubject />} />
+        <Route path='/subject' element={<PrivateRoute><SubjectBtn /></PrivateRoute>} />
+        <Route path='/subjectform' element={<PrivateRoute><SubjectForm /></PrivateRoute>} />
+        <Route path='showsubject' element={<PrivateRoute><ShowSubject /></PrivateRoute>} />
         {/* Teacher Related */}
-        <Route path='/teacher' element={<Teacher />} />
-        <Route path='/addteacher' element={<AddTeacher />} />
+        <Route path='/teacher' element={<PrivateRoute><Teacher /></PrivateRoute>} />
+        <Route path='/addteacher' element={<PrivateRoute><AddTeacher /></PrivateRoute>} />
         {/* Student Related */}
-        <Route path='/student' element={<Students />} />
-        <Route path='/addstudent' element={<AddStudent />} />
-        <Route path='/showstudent' element={<ShowStudent />} />
-        <Route path='/viewstudent' element={<ViewStudent />} />
-        <Route path='/studentattendence' element={<StudentAttendence />} />
+        <Route path='/student' element={<PrivateRoute><Students /></PrivateRoute>} />
+        <Route path='/addstudent' element={<PrivateRoute><AddStudent /></PrivateRoute>} />
+        <Route path='/showstudent' element={<PrivateRoute><ShowStudent /></PrivateRoute>} />
+        <Route path='/viewstudent' element={<PrivateRoute><ViewStudent /></PrivateRoute>} />
+        <Route path='/studentattendence' element={<PrivateRoute><StudentAttendence /></PrivateRoute>} />
         {/* Attendence view */}
-        <Route path='/attendenceview' element={<AttendenceView />} />
+        <Route path='/attendenceview' element={<PrivateRoute><AttendenceView /></PrivateRoute>} />
         {/* Marks Related */}
-        <Route path='/addmarks' element={<AddMarks />} />
+        <Route path='/addmarks' element={<PrivateRoute><AddMarks /></PrivateRoute>} />
         {/* Notice Related */}
-        <Route path='/notice' element={<Notices />} />
-        <Route path='/addnotice' element={<AddNotice />} />
-        <Route path='/shownotice' element={<ShowNotice />} />
+        <Route path='/notice' element={<PrivateRoute><Notices /></PrivateRoute>} />
+        <Route path='/addnotice' element={<PrivateRoute><AddNotice /></PrivateRoute>} />
+        <Route path='/shownotice' element={<PrivateRoute><ShowNotice /></PrivateRoute>} />
         {/* <Route path='/adminhome' element={<AdminHome />} /> */}
         {/* Student Section */}
         <Route path='/student/*' element={<StudentDashboard />} />
         {/* Teacher Section */}
         <Route path='/teacher/*' element={<TeacherDashboard />} />
-
+        {/* Logout for Admin*/}
+        <Route path='/logout' element={<Logout />} />
       </Routes>
     </Router>
 

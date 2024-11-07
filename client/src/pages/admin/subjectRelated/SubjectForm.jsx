@@ -16,12 +16,6 @@ function SubjectForm() {
             { subject: "", code: "", session: "" }
         ]);
     }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(subjectList);
-    }
-
     function removeSubject(index) {
         const updatedSubjects = subjectList.filter((_, i) => i !== index);
         setSubjectList(updatedSubjects);
@@ -33,10 +27,33 @@ function SubjectForm() {
         updatedSubjects[index][name] = value;
         setSubjectList(updatedSubjects);
     }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3500/api/subject/subjectform", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ subjects: subjectList }),  // Wrap array in an object
+            });
 
-    function handleSave() {
-        navigate('/showsubject');
-    }
+            if (response.ok) {
+                const responseData = await response.json();
+                setSubjectList([{ subject: "", code: "", session: "" }]); // Reset to an empty form
+                alert("Subjects added successfully");
+                console.log(responseData);
+                navigate("/showsubject");
+            } else {
+                const errorMessage = await response.text();
+                alert(`Error: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.log("Add subject error", error);
+        }
+    };
+
+
 
     return (
         <>
@@ -48,7 +65,7 @@ function SubjectForm() {
                     </div>
                     <div className="add-subject-form">
                         <h1 className="add-class-heading">Add Subject</h1>
-                        <form onSubmit={handleSubmit}>
+                        <form method='POST' onSubmit={handleSubmit}>
                             {subjectList.map((subject, index) => (
                                 <div key={index}>
                                     <div>
@@ -92,7 +109,7 @@ function SubjectForm() {
                             <button className="btn" type="button" onClick={addSubject}>
                                 Add Subject
                             </button>
-                            <button className="btn" onClick={handleSave} type="submit">Save</button>
+                            <button className="btn" type="submit">Save</button>
                         </form>
                     </div>
                 </div>

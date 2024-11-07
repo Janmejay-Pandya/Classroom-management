@@ -75,4 +75,5 @@
 .menu-bars-close{
   font-size: 2rem;
   color: white;
+  cursor: pointer;
 }

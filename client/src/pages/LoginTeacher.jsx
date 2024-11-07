@@ -4,6 +4,7 @@ import "../css/LoginTeacher.css";
 import { useState } from "react";
 
 function LoginTeacher() {
+  const naviagte = useNavigate();
   const [teacherlogin, setteacherlogin] = useState({
     teacheremail: "",
     teacherpassword: ""
@@ -16,9 +17,31 @@ function LoginTeacher() {
       [name]: value,
     })
   }
-  const naviagte = useNavigate();
-  function handleClick() {
-    naviagte('/teacher/teacherhome');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3500/api/createteacher/LoginTeacher", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(teacherlogin),
+      });
+      const result = await response.json();
+      // const responseData = await response.json();
+      if (!response.ok) {
+        alert("Login Successfull");
+        setteacherlogin({ teacheremail: "", teacherpassword: "" });
+        localStorage.setItem("token", result.token);
+        console.log("result", result);
+        naviagte('/teacher/teacherhome');
+
+      }
+    } catch (error) {
+      alert("Invalid Credentials");
+      console.error(error);
+
+    }
   }
   function handleGoBack() {
     naviagte('/ChooseUser');
@@ -32,7 +55,7 @@ function LoginTeacher() {
         <div className="login-form">
           <h1 className="student-login-heading">Teacher Login</h1>
           <p className="student-login-para">Welcome, Please enter your details</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <input
                 type="email"
@@ -40,7 +63,7 @@ function LoginTeacher() {
                 id="teacher-email"
                 placeholder="Enter your email*"
                 onChange={handleInput}
-                value={teacherLogin.teacheremail}
+                value={teacherLogin.email}
               />
             </div>
 
@@ -51,11 +74,11 @@ function LoginTeacher() {
                 id="std-password"
                 placeholder="Enter Password*"
                 onChange={handleInput}
-                value={teacherLogin.teacherpassword}
+                value={teacherLogin.password}
               />
             </div>
             <br />
-            <button className="btn std-btn" onClick={handleClick}>Login</button>
+            <button className="btn std-btn" >Login</button>
             <br />
             <button className="btn std-btn" onClick={handleGoBack}>Go Back</button>
           </form>

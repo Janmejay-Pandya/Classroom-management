@@ -11,7 +11,7 @@ const admin_register = async (req, res) => {
         }
         const userCreated = await adminRegister.create({ adminname, schoolname, adminemail, adminpassword });
         res.status(201).json({ msg: "Registration Successfull" });
-
+        
     } catch (error) {
         res.status(500).json("Internal Server Error");
     }
@@ -22,7 +22,7 @@ const admin_login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const adminemail = email;
-        const userExist = await adminRegister.findOne({ adminemail });
+        const userExist = await  adminRegister.findOne({ adminemail });
         if (!userExist) {
             return res.status(400).json({ message: "Invalid Credentials" });
         }

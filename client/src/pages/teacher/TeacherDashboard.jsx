@@ -5,6 +5,8 @@ import TeacherClassDetails from "./TeacherClassDetails";
 import TeacherViewStudent from "./TeacherViewStudent";
 import TeacherAttendance from "./TeacherAttendance";
 import TeacherNotice from "./teachernotice";
+import TeacherLogout from "./TeacherLogout";
+// import PropTypes from "prop-types";
 function TeacherDashboard() {
     return <>
         <div>
@@ -17,9 +19,14 @@ function TeacherDashboard() {
                 <Route path="/teacherviewstudent" element={<TeacherViewStudent />} />
                 <Route path="/teacherattendance" element={<TeacherAttendance />} />
                 <Route path="/teachernotice" element={<TeacherNotice />} />
+                <Route path="/teacherlogout" element={<TeacherLogout />} />
             </Routes>
         </div>
     </>
+}
+
+TeacherDashboard.propTypes = {
+
 }
 
 export default TeacherDashboard;

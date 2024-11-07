@@ -15,6 +15,28 @@ function AddTeacher() {
             [name]: value
         })
     }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3500/api/createteacher/addteacher", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(addteacher),
+            });
+            console.log(response);
+            if (response.ok) {
+                const responseData = await response.json();
+                setaddteacher({ teachername: "", teacheremail: "", teacherpassword: "" });
+                alert("Teacher added successfully");
+                console.log(responseData);
+            }
+        } catch (error) {
+            console.log("Teahcer", error);
+
+        }
+    }
     return <>
         <AdminDashboard />
         <section className="add-teacher">
@@ -23,7 +45,7 @@ function AddTeacher() {
             <p className="sub">Subject: </p>
             <br />
             <div className="add-teacher-form">
-                <form>
+                <form method="POST" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="name" className="name">Name</label>
                         <input
