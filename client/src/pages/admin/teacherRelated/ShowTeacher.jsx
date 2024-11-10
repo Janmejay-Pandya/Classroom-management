@@ -14,7 +14,7 @@ function ShowTeacher() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3500/api/createteacher/prof/delete/${id}`, {
+      const response = await fetch(`https://classroom-management-backend-one.vercel.app/api/createteacher/prof/delete/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
