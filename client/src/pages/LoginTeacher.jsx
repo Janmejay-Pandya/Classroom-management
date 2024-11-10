@@ -24,7 +24,7 @@ function LoginTeacher() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3500/api/createteacher/LoginTeacher", {
+      const response = await fetch("https://classroom-management-backend-one.vercel.app/api/createteacher/LoginTeacher", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
