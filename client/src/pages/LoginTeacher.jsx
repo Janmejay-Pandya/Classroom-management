@@ -2,9 +2,12 @@ import teacherLogin from "../assets/teacher-login-portal.png";
 import { useNavigate } from "react-router-dom";
 import "../css/LoginTeacher.css";
 import { useState } from "react";
+import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 function LoginTeacher() {
   const naviagte = useNavigate();
+  const { storeTokenInLS } = useAuth();
   const [teacherlogin, setteacherlogin] = useState({
     teacheremail: "",
     teacherpassword: ""
@@ -12,6 +15,7 @@ function LoginTeacher() {
   function handleInput(e) {
     let name = e.target.name;
     let value = e.target.value;
+
     setteacherlogin({
       ...teacherlogin,
       [name]: value,
@@ -27,18 +31,20 @@ function LoginTeacher() {
         },
         body: JSON.stringify(teacherlogin),
       });
-      const result = await response.json();
-      // const responseData = await response.json();
-      if (!response.ok) {
-        alert("Login Successfull");
+      // const result = await response.json();
+      const responseData = await response.json();
+      if (response.ok) {
+        toast.success("Login Teacher Successfull");
         setteacherlogin({ teacheremail: "", teacherpassword: "" });
-        localStorage.setItem("token", result.token);
-        console.log("result", result);
+        // console.log(responseData.token);
+        storeTokenInLS(responseData.token);
+        console.log("response Data from Login teacher", responseData);
         naviagte('/teacher/teacherhome');
-
+      } else {
+        console.log("There was an error in log in" + JSON.stringify(responseData))
+        toast.error("Invalid Credentials");
       }
     } catch (error) {
-      alert("Invalid Credentials");
       console.error(error);
 
     }

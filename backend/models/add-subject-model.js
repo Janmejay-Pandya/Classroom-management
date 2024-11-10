@@ -13,6 +13,11 @@ const subjectSchema = new mongoose.Schema({
     session: {
         type: Number,
         required: true
+    },
+    classes: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userClass',
+        required: true,
     }
 });
 

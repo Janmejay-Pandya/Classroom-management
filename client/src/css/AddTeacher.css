@@ -5,12 +5,12 @@
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     font-family: 'Arial', sans-serif;
 }
 
 /* Labels (e.g., Name, Email, Password) */
-.name,.email,.pass {
+.name,.email,.pass,.add-teacher-subject,.teacher-class{
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
@@ -20,7 +20,7 @@
 }
 
 /* Input fields styling */
-#name,#email,#password {
+#name,#email,#password,#teacherclass,#teachersubject {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -62,5 +62,5 @@
 }
 .add-teacher-heading{
     margin-top: 20px;
-    font-size: xxx-large;
+    font-size: xx-large;
 }

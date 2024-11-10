@@ -1,21 +1,30 @@
 import AdminDashboard from "../../../components/AdminDashboard";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../store/auth";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 function SubjectBtn() {
     const { classes } = useAuth();
-    console.log(classes);
-
+    const [isLoaded, setIsLoaded] = useState(false);
     const navigate = useNavigate();
-    function handleClick() {
-        if (classes.length == 0) {
+
+    useEffect(() => {
+        if (classes !== undefined) {
+            setIsLoaded(true); // Mark as loaded once classes are fetched
+        }
+    }, [classes]);
+
+    const handleClick = () => {
+        if (!isLoaded) return;
+
+        if (classes.length === 0) {
+            toast.info("Create a class to add a Subject");
             navigate("/addclass");
-            alert("Create class to add Subject");
+        } else {
+            navigate('/setclasssub');
         }
-        else {
-            navigate("/SubjectForm");
-        }
-    }
+    };
     return <>
         <AdminDashboard />
         <section className="section-class">

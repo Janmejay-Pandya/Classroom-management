@@ -1,15 +1,19 @@
 import AdminDashboard from "../../../components/AdminDashboard";
 // import "../../../css/Teacher.css";
+import { useAuth } from "../../../store/auth";
 import { useNavigate } from "react-router-dom";
 function Teacher() {
+    const { classes } = useAuth();
     const navigate = useNavigate();
-    let isTeacher = true;
+    console.log(classes.length);
+
     function handleClick() {
-        if (isTeacher == true) {
-            navigate('/addteacher');
+        if (classes.length === 0) {
+            alert("Create class to Add Teacher")
+            navigate('/addclass');
         }
         else {
-            navigate('/classes');
+            navigate('/addteacher');
         }
     }
     return <>

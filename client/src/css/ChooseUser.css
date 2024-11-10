@@ -6,6 +6,7 @@
     cursor: pointer;
     padding: 12px 12px;
     border-radius: 20px;
+    height: 155px;
 }
 .admin:hover{
     background-color: azure;

@@ -22,4 +22,17 @@ const getNotice = async (req, res) => {
         console.log(`Notice ${error}`);
     }
 };
-module.exports = { addNotice, getNotice };
+
+//delete notice
+const deleteNoticeById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await Notice.deleteOne({ _id: id }); 
+        return res.status(200).json({ msg: "Notice Deleted" });
+        // next();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+module.exports = { addNotice, getNotice, deleteNoticeById };

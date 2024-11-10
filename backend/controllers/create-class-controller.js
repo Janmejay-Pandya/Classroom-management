@@ -28,4 +28,14 @@ const getClass = async (req, res) => {
     }
 };
 
-module.exports = { create_class, getClass };
+const deleteClass = async (req, res) => {
+    try {
+         const id = req.params.id;
+        await createClass.deleteOne({ _id: id });
+        return res.status(200).json({ msg: "Class Deleted" });
+    } catch (error) {
+        console.log(error);
+        
+    }
+};
+module.exports = { create_class, getClass,deleteClass };

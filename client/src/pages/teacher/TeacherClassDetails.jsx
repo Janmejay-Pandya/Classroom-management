@@ -1,42 +1,45 @@
 import "../../css/TeacherClassDetails.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/auth";
 
 function TeacherClassDetails() {
+    const { student } = useAuth();
     const navigate = useNavigate();
-    function handleView() {
-        navigate("/teacher/teacherviewstudent");
+    function handleView(studentName, rollnumber) {
+        navigate(`/teacher/teacherviewstudent/${studentName}/${rollnumber}`);
     }
-    function handleClick() {
-        navigate('/teacher/teacherattendance');
+    function handleAttendence(studentName, rollnumber, classname) {
+        navigate(`/teacher/teacherattendance/${studentName}/${rollnumber}/${classname}`);
     }
-    const students = [
-        { name: 'jay', rollNumber: '2207012087' },
-        { name: 'stu1', rollNumber: '11' },
-        { name: 'stu2', rollNumber: '12' }
-    ];
     return <>
-        <div className="students-list-container">
-            <h2>Students List:</h2>
-            <table className="students-table">
+        <div className="table-container">
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Roll Number</th>
-                        <th>Actions</th>
+                        <th className="class-th">Class</th>
+                        <th className="action-th">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map((student, index) => (
-                        <tr key={index}>
-                            <td>{student.name}</td>
-                            <td>{student.rollNumber}</td>
-                            <td className="actions">
-                                <button className="view-button" onClick={handleView}>VIEW</button>
-                                <button className="attendance-button" onClick={handleClick}>TAKE ATTENDANCE</button>
-                                <button className="dropdown-button">▼</button>
-                            </td>
+                    {student.length > 0 ? (
+                        student.map((studentinfo, index) => (
+                            <tr key={index}>
+                                <td>{studentinfo.stdname}</td>
+                                <td>{studentinfo.stdrollnumber}</td>
+                                <td>{studentinfo.studentclass}</td>
+                                <td className="actions">
+                                    <button className="view-btn" onClick={() => handleView(studentinfo.stdname, studentinfo.stdrollnumber)}>Add Marks</button>
+                                    <button className="attendance-btn" onClick={() => handleAttendence(studentinfo.stdname, studentinfo.stdrollnumber, studentinfo.studentclass)}>TAKE ATTENDANCE</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4">No students found</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>

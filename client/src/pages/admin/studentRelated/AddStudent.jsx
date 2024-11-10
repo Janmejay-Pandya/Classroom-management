@@ -3,6 +3,7 @@ import "../../../css/AddStudent.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../../store/auth";
+import { toast } from "react-toastify";
 
 function AddStudent() {
     const { classes } = useAuth();
@@ -36,6 +37,7 @@ function AddStudent() {
             if (response.ok) {
                 const responseData = await response.json();
                 setaddstudent({ stdname: "", stdrollnumber: "", stdpassword: "", studentclass: "" });
+                toast.success("Student Added Successfully");
                 console.log(responseData);
                 navigate("/showstudent");
 

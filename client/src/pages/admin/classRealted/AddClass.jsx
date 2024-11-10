@@ -3,6 +3,8 @@ import classroom from "../../../assets/classroom.png";
 import "../../../css/AddClass.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 function AddClass() {
     const [addclass, setaddclass] = useState({
         classes: ""
@@ -32,13 +34,14 @@ function AddClass() {
             if (response.ok) {
                 const responseData = await response.json();
                 setaddclass("");
-                alert("Class created ");
+                toast.success("Class created ");
                 console.log(responseData);
                 // navigate("/classdetails");
             }
             else {
                 const errorText = await response.text(); // Handle non-JSON response
                 console.log("Error:", errorText);
+                toast.error("Error Adding Class");
             }
         } catch (error) {
             console.log("AddClass", error);

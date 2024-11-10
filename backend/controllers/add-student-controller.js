@@ -1,4 +1,4 @@
-const { Student, Class } = require("../models/add-student-model");
+const Student   = require("../models/add-student-model");
 
 //Add student logic
 const addStudent = async (req, res) => {
@@ -43,50 +43,35 @@ const getClasses = async (req, res) => {
 const student_login = async (req, res) => {
     try {
         const { stdrollnumber, stdpassword } = req.body;
-
         // Check if the student exists and validate password
-        const student = await Student.findOne({ stdrollnumber });
-        if (!student || !(await student.comparePassword(stdpassword))) {
-            return res.status(400).json({ message: "Invalid Credentials" });
+        if (!stdrollnumber || !stdpassword) {
+            return res.status(400).json({ message: "Roll Number and password are required" });
         }
-
-        // Generate a token (JWT) for the logged-in student
-        const token = await student.generateToken();
-        return res.status(200).json({
-            message: "Login successful",
-            token,
-        });
+        const userExist = await Student.findOne({ stdrollnumber });
+        console.log("User Exist:", userExist); // Check if user exists and methods are available
+        console.log("Has comparePassword method:", typeof userExist.comparePassword === "function");
+        
+        if (!userExist) {
+            return res.status(400).json({ msg: "Invalid Credentials " });
+        }
+        const isValidPassword = await userExist.comparePassword(stdpassword);
+        console.log("password ",isValidPassword);
+        
+        if (isValidPassword) {
+            const token = await userExist.generateToken();
+            return res.status(201).json({
+                message: "Student Login Successfull",
+                token: token,
+                userId: userExist._id.toString(),
+            });
+        }else {
+            return res.status(401).json({ message: "Invalid password" });
+        }
     } catch (error) {
-        console.error("Error during login:", error);
-        return res.status(500).json({ message: "Internal Server Error" });
+        console.error("Error During Login",error);
+        return res.status(500).json({ msg: "Internal server error ", error: error.message });
     }
 };
-// const student_login = async (req, res) => {
-//     try {
-//         const { stdrollnumber, stdpassword } = req.body;
-//         const student = await Student.findOne({ stdrollnumber });
-//         console.log(student);
-//         if (!student || student.stdpassword !== stdpassword) {
-//             alert("Invalid Credentials");
-//             return res.status(400).json({ msg: "Invalid Credentials" });
-//         }
-//         const user=await 
-//         if (student && student.stdpassword == stdpassword) {
-//             const token = await student.generateToken();
-//             const response = {
-//                 msg: "Student Login Successfull",
-//                 token: token,
-//                 userId: student._id.toString()
-//             }
-//             console.log("Student login response",response);
-//         }
-//         else {
-//             res.status(401).json("Internal server error from the student login side ");
-//         }
-//     } catch (error) {
-//         res.status(500).json( "Internal error from student login "+ error);
-//     }
-// };
 
 //Display all the student
 const getStudent = async (req, res) => {
@@ -101,4 +86,30 @@ const getStudent = async (req, res) => {
     }
 };
 
-module.exports = { addStudent, getClasses, student_login, getStudent };
+//loggedIn student data
+const logged_in_user = async (req, res) => {
+    try {
+        const userData = req.user;
+        console.log(userData);
+        res.status(200).json({ msg: userData });
+        
+    } catch (error) {
+        console.log(`error from student route ${error}`);
+        
+    }
+}
+
+const countStudent = async (req, res) => {
+    try {
+        // Count all student documents in the collection
+        const countStd = await Student.countDocuments();
+        console.log("Total students count:", countStd);
+        res.status(200).json({ count: countStd });
+    } catch (error) {
+        console.log("Error counting students:", error);
+        res.status(500).json({ message: "Error counting students" });
+    }
+};
+
+
+module.exports = { addStudent, getClasses, student_login, getStudent, logged_in_user, countStudent };

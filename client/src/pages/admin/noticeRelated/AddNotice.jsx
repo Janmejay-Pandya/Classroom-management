@@ -3,7 +3,7 @@ import "../../../css/AddNotice.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../../store/auth"; // Import useAuth
-
+import { toast } from "react-toastify";
 
 function AddNotice() {
     const navigate = useNavigate();
@@ -32,12 +32,14 @@ function AddNotice() {
                 body: JSON.stringify(notice),
             });
             if (response.ok) {
-                alert("Notice Added Successfully");
+                toast.success("Notice Added Successfully");
                 const responseData = await response.json();
                 // addNotice(responseData.msg);
                 setnotice({ title: "", details: "", date: "" });
                 console.log(responseData);
                 navigate('/shownotice');
+            } else {
+                toast.error("Error Adding Notice");
             }
         } catch (error) {
             console.error("Error adding notice", error);
@@ -54,7 +56,7 @@ function AddNotice() {
                         <input type="text" name="title" id="title" placeholder="Enter Notice Title" onChange={handleInput} value={notice.title} />
                     </div>
                     <div>
-                        <label htmlFor="details" className="details">Email</label>
+                        <label htmlFor="details" className="details">Details</label>
                         <textarea type="text" name="details" id="details" placeholder="Enter Notice Details" onChange={handleInput} value={notice.details} />
                     </div>
                     <div>

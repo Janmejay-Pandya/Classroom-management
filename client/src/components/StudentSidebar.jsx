@@ -37,7 +37,7 @@ function StudentSidebar({ title }) {
                     <Link to="studentattendance"><li className="nav-text"><img src={attendance} alt="attendance" />Attendance</li></Link>
                     <Link to="studentsubject"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
                     <br />
-                    <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
+                    <Link to="/student/studentprofile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
                     <Link to="/student/studentlogout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
                 </ul>
             </nav>

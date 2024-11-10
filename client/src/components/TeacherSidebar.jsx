@@ -33,10 +33,10 @@ function TeacherSidebar({ title }) {
                         <FaTimes onClick={showSidebar} className="menu-bars-close" />
                     </li>
                     <Link to="teacherhome"><li className="nav-text"><img src={home} alt="home" />Home</li></Link>
-                    <Link to="teacherclassdetails"><li className="nav-text"><img src={teacherclass} alt="classes" />Classes</li></Link>
+                    <Link to="teacherclassdetails"><li className="nav-text"><img src={teacherclass} alt="classes" />Class </li></Link>
                     <Link to="teachernotice"><li className="nav-text"><img src={notice} alt="notice" />Notices</li></Link>
                     <br />
-                    <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
+                    <Link to="/teacher/teacherprofile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
                     <Link to="/teacher/teacherlogout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
                 </ul>
             </nav>

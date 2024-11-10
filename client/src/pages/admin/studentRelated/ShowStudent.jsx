@@ -8,12 +8,15 @@ import { useAuth } from "../../../store/auth";
 function ShowStudent() {
     const navigate = useNavigate();
     const { student } = useAuth();
-
-    function handleView() {
-        navigate('/viewstudent');
+    function handleClick() {
+        navigate("/addstudent");
     }
-    function handleAttendence() {
-        navigate('/studentattendence');
+
+    function handleView(studentName, rollnumber) {
+        navigate(`/addmarks/${studentName}/${rollnumber}`);
+    }
+    const handleAttendence = (studentName, rollnumber, classname) => {
+        navigate(`/studentattendence/${studentName}/${rollnumber}/${classname}`);
     }
     return <>
         <AdminDashboard />
@@ -23,8 +26,8 @@ function ShowStudent() {
                     <tr>
                         <th>Name</th>
                         <th>Roll Number</th>
-                        <th>Class</th>
-                        <th>Actions</th>
+                        <th className="class-th">Class</th>
+                        <th className="action-th">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +38,8 @@ function ShowStudent() {
                                 <td>{studentinfo.stdrollnumber}</td>
                                 <td>{studentinfo.studentclass}</td>
                                 <td className="actions">
-                                    <button className="view-btn" onClick={handleView}>VIEW</button>
-                                    <button className="attendance-btn" onClick={handleAttendence}>TAKE ATTENDANCE</button>
+                                    <button className="view-btn" onClick={() => handleView(studentinfo.stdname, studentinfo.stdrollnumber)}>Add Marks</button>
+                                    <button className="attendance-btn" onClick={() => handleAttendence(studentinfo.stdname, studentinfo.stdrollnumber, studentinfo.studentclass)}>TAKE ATTENDANCE</button>
                                 </td>
                             </tr>
                         ))
@@ -48,6 +51,7 @@ function ShowStudent() {
                 </tbody>
             </table>
         </div>
+        <button className="btn" onClick={handleClick}>Add New Student</button>
     </>
 }
 

@@ -16,3 +16,9 @@
 .class-name-th{
     width: 800px;
 }
+.class-container{
+  width: 700px;
+  margin: auto;
+  margin-top: 40px;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+}

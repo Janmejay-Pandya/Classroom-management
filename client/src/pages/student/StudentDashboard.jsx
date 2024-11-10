@@ -4,6 +4,8 @@ import StudentHome from "./StudentHome";
 import StudentSubject from "./StudentSubject";
 import ViewStdAttendance from "./ViewStdAttendance";
 import StudentLogout from "./StudentLogout";
+import PrivateRoute from "../../PrivateRoute";
+import StudentProfile from "./StudentProfile";
 function StudentDashboard() {
     return <>
         <div>
@@ -11,10 +13,11 @@ function StudentDashboard() {
                 <StudentSidebar title={"Student DashBoard"} />
             </main>
             <Routes>
-                <Route path="/studenthome" element={<StudentHome />} />
-                <Route path="/studentsubject" element={<StudentSubject />} />
-                <Route path="/studentattendance" element={<ViewStdAttendance />} />
-                <Route path="/studentlogout" element={<StudentLogout />} />
+                <Route path="/studenthome" element={<PrivateRoute> <StudentHome /></PrivateRoute>} />
+                <Route path="/studentsubject" element={<PrivateRoute><StudentSubject /></PrivateRoute>} />
+                <Route path="/studentattendance" element={<PrivateRoute><ViewStdAttendance /></PrivateRoute>} />
+                <Route path="/studentlogout" element={<PrivateRoute><StudentLogout /></PrivateRoute>} />
+                <Route path="/studentprofile" element={<PrivateRoute><StudentProfile /></PrivateRoute>} />
             </Routes>
         </div>
     </>

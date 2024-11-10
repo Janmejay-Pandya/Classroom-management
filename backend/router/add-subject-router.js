@@ -7,6 +7,8 @@ router.route("/subjectform").post(Subject.createSubject);
 
 router.route("/showsubject").get(Subject.getSubject);
 
+router.route("/getsubjectbyclass").get(Subject.getSubjectByClass);
+router.route("/sub/delete/:id").delete(Subject.deleteSubject);
 
 // Route to get all subjects
 

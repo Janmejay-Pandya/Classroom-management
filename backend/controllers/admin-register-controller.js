@@ -22,7 +22,7 @@ const admin_login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const adminemail = email;
-        const userExist = await  adminRegister.findOne({ adminemail });
+        const userExist = await adminRegister.findOne({ adminemail });
         if (!userExist) {
             return res.status(400).json({ message: "Invalid Credentials" });
         }
@@ -38,10 +38,23 @@ const admin_login = async (req, res) => {
             res.status(201).json(response);
         }
         else {
-            res.status(401).json( "Internal Server Error");
+            res.status(401).json("Internal Server Error");
         }
     } catch (error) {
         res.status(500).json("Internal server error from catch statement" + error);
     }
+};
+
+//to get the information of the user logged in
+const logged_in_user = async (req, res) => {
+    try {
+        const userData = req.user;
+        console.log("The logged in user data is ",userData);
+        return res.status(200).json({ msg: userData });
+    } catch (error) {
+        console.log(`Error from logged_in_user route ${error} `);
+        
+    }
+    
 }
-module.exports = { admin_register, admin_login };
+module.exports = { admin_register, admin_login, logged_in_user };

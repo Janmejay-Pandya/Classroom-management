@@ -36,12 +36,12 @@ function Sidebar({ title }) {
                     </li>
                     <Link to="/AdminDash"><li className="nav-text"><img src={home} alt="home" />Home</li></Link>
                     <Link to="/classdisplay"><li className="nav-text"><img src={classes} alt="classes" />Classes</li></Link>
-                    <Link to="/subject"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
-                    <Link to="/teacher"><li className="nav-text"><img src={teachers} alt="teachers" />Teacher</li></Link>
-                    <Link to="/student"><li className="nav-text"><img src={student} alt="student" />Student</li></Link>
-                    <Link to="/notice"><li className="nav-text"><img src={notice} alt="notice" />Notices</li></Link>
+                    <Link to="/subjectlist"><li className="nav-text"><img src={subject} alt="subject" />Subject</li></Link>
+                    <Link to="/teacherlist"><li className="nav-text"><img src={teachers} alt="teachers" />Teacher</li></Link>
+                    <Link to="/studentlist"><li className="nav-text"><img src={student} alt="student" />Student</li></Link>
+                    <Link to="/noticelist"><li className="nav-text"><img src={notice} alt="notice" />Notices</li></Link>
                     <br />
-                    <Link to="/profile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
+                    <Link to="/adminprofile"><li className="nav-text"><img src={profile} alt="profile" />Profile</li></Link>
                     <Link to="/logout"><li className="nav-text"><img src={logout} alt="logout" />Logout</li></Link>
                 </ul>
             </nav>

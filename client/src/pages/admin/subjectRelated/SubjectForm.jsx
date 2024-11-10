@@ -3,19 +3,27 @@ import Subject from "../../../assets/subjects.jpg";
 import AdminDashboard from "../../../components/AdminDashboard";
 import "../../../css/SubjectForm.css";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 function SubjectForm() {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [subjectList, setSubjectList] = useState([
-        { subject: "", code: "", session: "" }
+        { subject: "", code: "", session: "", selectedClassId: location.state.selectedClassId }
     ]);
+
+    console.log(subjectList)
 
     function addSubject() {
         setSubjectList([
             ...subjectList,
-            { subject: "", code: "", session: "" }
+            { subject: "", code: "", session: "", selectedClassId: location.state.selectedClassId }
         ]);
     }
+
     function removeSubject(index) {
         const updatedSubjects = subjectList.filter((_, i) => i !== index);
         setSubjectList(updatedSubjects);
@@ -27,20 +35,24 @@ function SubjectForm() {
         updatedSubjects[index][name] = value;
         setSubjectList(updatedSubjects);
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log(subjectList)
         try {
             const response = await fetch("http://localhost:3500/api/subject/subjectform", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ subjects: subjectList }),  // Wrap array in an object
+                body: JSON.stringify({
+                    subjects: subjectList  // Add selectedClassId in the request body
+                }),
             });
 
             if (response.ok) {
                 const responseData = await response.json();
-                setSubjectList([{ subject: "", code: "", session: "" }]); // Reset to an empty form
+                setSubjectList([{ subject: "", code: "", session: "", selectedClassId: "" }]); // Reset to an empty form
                 alert("Subjects added successfully");
                 console.log(responseData);
                 navigate("/showsubject");
@@ -52,8 +64,6 @@ function SubjectForm() {
             console.log("Add subject error", error);
         }
     };
-
-
 
     return (
         <>
@@ -116,6 +126,10 @@ function SubjectForm() {
             </section>
         </>
     );
+}
+
+SubjectForm.propTypes = {
+    selectedClassId: PropTypes.string
 }
 
 export default SubjectForm;

@@ -3,6 +3,8 @@ import "../css/LoginPageAdmin.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
+
 function LoginPageAdmin() {
     const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
@@ -31,17 +33,16 @@ function LoginPageAdmin() {
 
             const responseData = await response.json();
             if (response.ok) {
-                alert("Login Successfull");
+                toast.success("Login Successfull");
                 setadminlogin({ email: "", password: "" });
                 storeTokenInLS(responseData.token);
                 console.log(responseData);
                 navigate("/admindash");
             } else {
-
                 console.log("There was an error in log in" + JSON.stringify(responseData))
+                toast.error("Invalid Credentials");
             }
         } catch (error) {
-            alert("Invalid Credentials");
             console.log(error);
 
         }
@@ -51,7 +52,7 @@ function LoginPageAdmin() {
     }
     return <>
         <section className="admin-login">
-            <div className="conatainer grid grid-two-cols">
+            <div className="admin-conatainer grid grid-two-cols">
                 <div className="admin-login-img">
                     <img src={loginImg} alt="" width={500} height={500} />
                 </div>

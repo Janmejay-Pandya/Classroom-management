@@ -2,8 +2,9 @@ import registerImg from "../assets/register.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../store/auth";
-
 import "../css/AdminRegister.css";
+import { toast } from "react-toastify";
+
 function AdminRegister() {
     const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
@@ -38,9 +39,11 @@ function AdminRegister() {
                 const responseData = await response.json();
                 setregisteradmin({ adminname: "", schoolname: "", adminemail: "", adminpassword: "" });
                 storeTokenInLS(responseData.token);
-                alert("Registration Successfull, Welcome to the Admin DashBoard");
+                toast.success("Registration Successfull, Welcome to the Admin DashBoard");
                 console.log(responseData);
                 navigate("/AdminDash");
+            } else {
+                toast.error("Invalid Details");
             }
         } catch (error) {
             console.log("Register", error);
@@ -59,19 +62,19 @@ function AdminRegister() {
                         You will be able to add students and faculty and manage the system.</p>
                     <form method="POST" onSubmit={handleSubmit}>
                         <div>
-                            <input type="text" name="adminname" id="admin-name" placeholder="Enter your name* " onChange={handleInput} />
+                            <input type="text" name="adminname" id="admin-name" placeholder="Enter your name* " autoComplete="off" onChange={handleInput} />
                         </div>
 
                         <div>
-                            <input type="text" name="schoolname" id="schoolname" placeholder="Create your School Name* " onChange={handleInput} />
+                            <input type="text" name="schoolname" id="schoolname" placeholder="Create your School Name* " autoComplete="off" onChange={handleInput} />
                         </div>
 
                         <div>
-                            <input type="email" name="adminemail" id="admin-email" placeholder="Enter your email* " onChange={handleInput} />
+                            <input type="email" name="adminemail" id="admin-email" placeholder="Enter your email* " autoComplete="off" onChange={handleInput} />
                         </div>
 
                         <div>
-                            <input type="password" name="adminpassword" id="admin-password" placeholder="Password* " onChange={handleInput} />
+                            <input type="password" name="adminpassword" id="admin-password" placeholder="Password* " autoComplete="off" onChange={handleInput} />
                         </div>
                         <button className="btn" >Register</button>
                     </form>

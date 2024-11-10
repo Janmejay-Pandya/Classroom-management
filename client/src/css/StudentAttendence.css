@@ -27,8 +27,14 @@
 #date{
     height: 40.67px;
 }
+#rollnumber{
+    width: 100%;
+}
+#classname{
+    width: 100%;
+}
 
-#stu-subject,#attendence-status,#date{
+#stu-subject,#attendence-status,#date,#rollnumber,#classname{
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;

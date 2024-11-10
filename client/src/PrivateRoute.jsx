@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const PrivateRoute = ({ children }) => {
     const token = localStorage.getItem("token");
 
-    return token ? children : <Navigate to="/LoginPageAdmin" />;
+    return token ? children : <Navigate to="/chooseuser" />;
 };
 PrivateRoute.propTypes = {
     children: PropTypes.node.isRequired,

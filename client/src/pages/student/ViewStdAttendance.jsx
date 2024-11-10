@@ -1,13 +1,48 @@
-import { useState } from "react";
 import "../../css/ViewStdAttendance.css";
+import { useAuth } from "../../store/auth";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { FaTrash } from "react-icons/fa";
 
 function ViewStdAttendance() {
-    const [showDetails, setShowDetails] = useState(false);
+    const { loggedInStd } = useAuth();
+    const [subjects, setSubjects] = useState([]);
+    const [presentCounts, setPresentCounts] = useState({});
 
-    const handleToggle = () => {
-        setShowDetails(!showDetails);
+    useEffect(() => {
+        if (loggedInStd && loggedInStd.studentclass) {
+            axios
+                .get(`http://localhost:3500/api/subject/getsubjectbyclass`, {
+                    params: { classId: loggedInStd.studentclass },
+                })
+                .then((response) => {
+                    setSubjects(response.data);
+                    // Fetch present count for each subject
+                    response.data.forEach(subject => {
+                        axios
+                            .get(`http://localhost:3500/api/attendance/getpresentcount`, {
+                                params: { rollnumber: loggedInStd.stdrollnumber, subject: subject.subject },
+                            })
+                            .then((countResponse) => {
+                                setPresentCounts(prevCounts => ({
+                                    ...prevCounts,
+                                    [subject._id]: countResponse.data.presentCount,
+                                }));
+                            });
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error fetching subjects:", error);
+                });
+        }
+    }, [loggedInStd]);
+
+    const handleClick = () => {
+
     };
-    return <>
+
+
+    return (
         <div className="attendance-container">
             <h1 className="view-std-attendance-h1">Attendance</h1>
             <table className="attendance-table">
@@ -16,56 +51,37 @@ function ViewStdAttendance() {
                         <th>Subject</th>
                         <th>Present</th>
                         <th>Total Sessions</th>
-                        <th>Attendance Percentage</th>
+                        <th>Total Attendance</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>CO</td>
-                        <td>3</td>
-                        <td>23</td>
-                        <td>13.04%</td>
-                        <td>
-                            <button className="details-button" onClick={handleToggle}>
-                                {showDetails ? "▲ DETAILS" : "▼ DETAILS"}
-                            </button>
-                        </td>
-                    </tr>
+                    {subjects.length > 0 ? (
+                        subjects.map((subject) => (
+                            <tr key={subject._id}>
+                                <td>{subject.subject}</td>
+                                <td>{presentCounts[subject._id] || 0}</td>
+                                <td>{subject.session}</td>
+                                <td>{((presentCounts[subject._id] / subject.session) * 100).toFixed(2)}%</td>
+                                <td>
+                                    <button className="delete-btn" onClick={handleClick}>
+                                        <FaTrash />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4">No subjects found for this class.</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
-
-            {showDetails && (
-                <div className="attendance-details">
-                    <h2>Attendance Details</h2>
-                    <table className="details-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2024-10-01</td>
-                                <td>Present</td>
-                            </tr>
-                            <tr>
-                                <td>2024-10-02</td>
-                                <td>Present</td>
-                            </tr>
-                            <tr>
-                                <td>2024-10-03</td>
-                                <td>Present</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>Overall Attendance Percentage: 13.04%</p>
-                </div>
-            )}
-
         </div>
-    </>
+    );
 }
 
 export default ViewStdAttendance;
+
+
+

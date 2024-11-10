@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "../css/LoginStudent.css";
 import { useState } from "react";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 function LoginStudent() {
+  const navigate = useNavigate();
   const { storeTokenInLS } = useAuth();
   const [stdlogin, setstdlogin] = useState({
-    sturollnumber: "",
-    studentname: "",
-    studentpassword: ""
+    stdrollnumber: "",
+    stdname: "",
+    stdpassword: ""
   });
   function handleInput(e) {
     let name = e.target.name;
@@ -20,25 +22,32 @@ function LoginStudent() {
       [name]: value,
     })
   }
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3500/api/std/LoginStudent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(stdlogin),
-    });
-    console.log(response);
+    try {
+      const response = await fetch("http://localhost:3500/api/std/LoginStudent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(stdlogin),
+      });
+      console.log(response);
 
-    const responseData = await response.json();
-    if (response.ok) {
-      alert("Student Login Successfull");
-      setstdlogin({ sturollnumber: "", studentname: "", studentpassword: "" });
-      storeTokenInLS(responseData.token);
-      console.log(responseData);
-      navigate('/student/studenthome');
+      const responseData = await response.json();
+      if (response.ok) {
+        toast.success("Student Login Successfull");
+        setstdlogin({ stdrollnumber: "", stdname: "", stdpassword: "" });
+        storeTokenInLS(responseData.token);
+        console.log("Response data from student", responseData);
+        navigate('/student/studenthome');
+      } else {
+        console.log("There was an error in log in" + JSON.stringify(responseData))
+        toast.error("Invalid Credentials");
+      }
+    } catch (error) {
+
+      console.error(error);
     }
   }
   return (
@@ -54,7 +63,7 @@ function LoginStudent() {
             <div>
               <input
                 type="number"
-                name="sturollnumber"
+                name="stdrollnumber"
                 id="stu-roll-number"
                 placeholder="Enter student's Roll Number"
                 onChange={handleInput}
@@ -65,7 +74,7 @@ function LoginStudent() {
             <div>
               <input
                 type="text"
-                name="studentname"
+                name="stdname"
                 id="std-name"
                 placeholder="Enter student's Name"
                 onChange={handleInput}
@@ -76,7 +85,7 @@ function LoginStudent() {
             <div>
               <input
                 type="password"
-                name="studentpassword"
+                name="stdpassword"
                 id="std-password"
                 placeholder="Enter student's Password"
                 onChange={handleInput}

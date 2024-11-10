@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
 
 // Student Model
 const studentSchema = new mongoose.Schema({
@@ -23,18 +23,7 @@ const studentSchema = new mongoose.Schema({
     },
 });
 
-const Student = mongoose.model("Student", studentSchema,"Student Data");
-
-// Class Model
-const classSchema = new mongoose.Schema({
-    classes: {
-        type: String,
-        required: true,
-    },
-});
-
 //Secure the password with bcrypt
-
 studentSchema.pre("save", async function (next) {
     const user = this;
     if (!user.isModified("stdpassword")) {
@@ -51,36 +40,15 @@ studentSchema.pre("save", async function (next) {
 
 //compare password
 studentSchema.methods.comparePassword = async function (stdpassword) {
-    return bcrypt.compare(stdpassword, this.stdpassword);
-}
-
+    return await bcrypt.compare(stdpassword, this.stdpassword);
+};
 //JWT
-// studentSchema.methods.generateToken = async function () {
-//     try {
-//         console.log(process.env)
-//         return jwt.sign(
-//             {
-//                 userId: this._id.toString(),
-//                 stdrollnumber: this.stdrollnumber,
-//                 isAdmin: this.isAdmin
-//             },
-//             "JANMEJAYPANDYA",
-//             {
-//                 expiresIn: "20d",
-//             }
-//         );
-//     } catch (error) {
-//         console.error(error);
-        
-//     }
-// }
 studentSchema.methods.generateToken = async function () {
     try {
         return jwt.sign(
             {
-                userId: this._id.toString(),
+                _id: this._id,
                 stdrollnumber: this.stdrollnumber,
-                isAdmin: this.isAdmin
             },
             "JANMEJAYPANDYA",
             {
@@ -92,7 +60,4 @@ studentSchema.methods.generateToken = async function () {
     }
 }
 
-
-const Class = mongoose.model("Class", classSchema);
-
-module.exports = { Student, Class };
+module.exports =mongoose.model("Student", studentSchema,"Student Data");

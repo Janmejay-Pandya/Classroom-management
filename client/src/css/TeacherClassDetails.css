@@ -62,3 +62,6 @@
 .view-button:hover, .attendance-button:hover, .dropdown-button:hover {
   opacity: 0.8;
 }
+teacher-th{
+  padding-right: 200px;
+}
