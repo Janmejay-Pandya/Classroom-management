@@ -20,7 +20,7 @@ function ClassDetails() {
     useEffect(() => {
         if (loggedInStd && loggedInStd.studentclass) {
             // Fetch subjects in the class
-            axios.get("http://localhost:3500/api/subject/getsubjectbyclass", {
+            axios.get("https://classroom-management-backend-one.vercel.app/api/subject/getsubjectbyclass", {
                 params: { classId: loggedInStd.studentclass },
             })
                 .then((response) => {
@@ -29,7 +29,7 @@ function ClassDetails() {
                 .catch((error) => console.error("Error fetching subjects:", error));
 
             // Fetch students in the class
-            axios.get("http://localhost:3500/api/std/getstudentsbyclass", {
+            axios.get("https://classroom-management-backend-one.vercel.app/api/std/getstudentsbyclass", {
                 params: { classId: loggedInStd.studentclass },
             })
                 .then((response) => {
