@@ -11,7 +11,7 @@ function StudentProfile() {
 
     useEffect(() => {
         if (loggedInStd) {
-            axios.get(`http://localhost:3500/api/student/getProfilePic/${loggedInStd.stdrollnumber}`)
+            axios.get(`https://classroom-management-backend-one.vercel.app/api/student/getProfilePic/${loggedInStd.stdrollnumber}`)
                 .then((response) => {
                     setProfilePic(response.data.profilePic);
                 })
