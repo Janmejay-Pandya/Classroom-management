@@ -14,14 +14,14 @@ function StudentHome() {
         if (loggedInStd && loggedInStd.studentclass) {
             // Fetch subjects for the student's class
             axios
-                .get(`http://localhost:3500/api/subject/getsubjectbyclass`, {
+                .get(`https://classroom-management-backend-one.vercel.app/api/subject/getsubjectbyclass`, {
                     params: { classId: loggedInStd.studentclass },
                 })
                 .then((response) => {
                     setSubjects(response.data);
                     const subjectPromises = response.data.map((subject) =>
                         axios
-                            .get(`http://localhost:3500/api/attendance/getpresentcount`, {
+                            .get(`https://classroom-management-backend-one.vercel.app/attendance/getpresentcount`, {
                                 params: { rollnumber: loggedInStd.stdrollnumber, subject: subject.subject },
                             })
                             .then((countResponse) => ({
